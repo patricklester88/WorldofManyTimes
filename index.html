@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>World of Many Times | Live Time Zone Windows</title>
-  <meta name="description" content="Two live windows into the world, starting with London and rotating through eight time zones roughly three hours apart, now including Sydney, Australia." />
+  <meta name="description" content="Two live windows into the world, starting with London and rotating through time zones with embedded streams from London, New York, Singapore, Hong Kong and Sydney." />
   <style>
     :root{
       --navy:#111b33;
@@ -718,7 +718,7 @@
     </section>
 
     <section class="edit-note">
-      <strong>To activate real embedded streams:</strong> edit the <code>STREAMS</code> list near the bottom of this file and paste a YouTube live video ID into each <code>youtubeId</code> field. London, New York, Singapore and Sydney are already embedded as first test streams. Any stream that does not yet have a YouTube ID shows a smart placeholder plus a “Find live cam” search button.
+      <strong>To activate real embedded streams:</strong> edit the <code>STREAMS</code> list near the bottom of this file and paste a YouTube live video ID into each <code>youtubeId</code> field. London, New York, Singapore, Hong Kong and Sydney are already embedded as first test streams. Each embedded stream also shows the place or landmark being shown. Any stream that does not yet have a YouTube ID shows a smart placeholder plus a “Find live cam” search button.
     </section>
 
     <footer>
@@ -751,6 +751,7 @@
         zone:"Pacific/Honolulu",
         offsetHint:"UTC−10",
         youtubeId:"",
+        sourcePlace:"Hawaii live-cam slot",
         search:"Honolulu Hawaii live webcam YouTube",
         line:"In Honolulu, the day is taking its time, which is frankly a healthier attitude."
       },
@@ -760,6 +761,7 @@
         zone:"America/Phoenix",
         offsetHint:"UTC−7",
         youtubeId:"",
+        sourcePlace:"Phoenix live-cam slot",
         search:"Phoenix Arizona live webcam YouTube",
         line:"In Phoenix, the clock is probably wearing sunglasses."
       },
@@ -770,6 +772,7 @@
         offsetHint:"UTC−5/−4",
         youtubeId:"z-jYdOIKcTQ",
         sourceUrl:"https://www.youtube.com/watch?v=z-jYdOIKcTQ",
+        sourcePlace:"Times Square Crossroads, Manhattan",
         search:"New York Times Square live webcam YouTube",
         line:"In New York, the day is still negotiating with traffic, ambition and coffee."
       },
@@ -780,6 +783,7 @@
         offsetHint:"UK",
         youtubeId:"M3EYAY2MftI",
         sourceUrl:"https://www.youtube.com/watch?v=M3EYAY2MftI",
+        sourcePlace:"Abbey Road crossing, London",
         search:"London UK live webcam YouTube Abbey Road",
         line:"In London, someone is crossing a road with more cultural pressure than seems fair."
       },
@@ -789,6 +793,7 @@
         zone:"Africa/Johannesburg",
         offsetHint:"UTC+2",
         youtubeId:"",
+        sourcePlace:"Cape Town live-cam slot",
         search:"Cape Town live webcam YouTube",
         line:"In Cape Town, the day has scenery and is not being modest about it."
       },
@@ -798,6 +803,7 @@
         zone:"Asia/Karachi",
         offsetHint:"UTC+5",
         youtubeId:"",
+        sourcePlace:"Karachi live-cam slot",
         search:"Karachi Pakistan live webcam YouTube",
         line:"In Karachi, the world has moved several hours ahead and is pretending that is normal."
       },
@@ -808,8 +814,20 @@
         offsetHint:"UTC+8",
         youtubeId:"9cfkyMzanbc",
         sourceUrl:"https://www.youtube.com/watch?v=9cfkyMzanbc",
+        sourcePlace:"Downtown Singapore",
         search:"Downtown Singapore live webcam YouTube",
         line:"In Singapore, tomorrow-adjacent efficiency is already happening."
+      },
+      {
+        city:"Hong Kong",
+        country:"Hong Kong",
+        zone:"Asia/Hong_Kong",
+        offsetHint:"UTC+8",
+        youtubeId:"r1VOcQ1xUN0",
+        sourceUrl:"https://www.youtube.com/watch?v=r1VOcQ1xUN0",
+        sourcePlace:"The Peak, overlooking Victoria Harbour and Kowloon",
+        search:"Hong Kong The Peak Victoria Harbour live webcam YouTube",
+        line:"In Hong Kong, the skyline is pretending it was arranged by someone with very good handwriting."
       },
       {
         city:"Sydney",
@@ -818,6 +836,7 @@
         offsetHint:"UTC+10/+11",
         youtubeId:"5uZa3-RMFos",
         sourceUrl:"https://www.youtube.com/watch?v=5uZa3-RMFos",
+        sourcePlace:"Sydney Harbour",
         search:"Sydney Harbour live webcam YouTube",
         line:"In Sydney, the harbour is awake, sparkling, and quietly showing off."
       }
@@ -1000,7 +1019,7 @@
       if(embed){
         container.innerHTML = `
           <iframe
-            title="${escapeHtml(stream.city)} live stream"
+            title="${escapeHtml(stream.city)} live stream — ${escapeHtml(stream.sourcePlace || stream.city)}"
             src="${embed}"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
@@ -1082,8 +1101,9 @@
 
       win.elements.title.textContent = stream.city;
       win.elements.time.textContent = formatTime(now, stream.zone);
-      win.elements.meta.textContent = `${stream.country} · ${stream.zone} · ${offset} · ${formatDate(now, stream.zone)}`;
-      win.elements.line.textContent = `${stream.line} Locally, they are ${statusForHour(localHour)}.`;
+      const shownPlace = stream.sourcePlace || stream.city;
+      win.elements.meta.textContent = `${stream.country} · ${stream.zone} · ${offset} · ${formatDate(now, stream.zone)} · Showing: ${shownPlace}`;
+      win.elements.line.textContent = `${stream.line} Locally, they are ${statusForHour(localHour)}. Live view: ${shownPlace}.`;
       win.elements.search.href = searchUrl(stream);
       win.elements.search.textContent = stream.youtubeId ? "Open stream on YouTube" : "Find live cam";
       renderVideo(windowKey);
@@ -1113,7 +1133,7 @@
         <article class="zone-card" data-index="${index}">
           <h3 class="zone-city">${escapeHtml(stream.city)}</h3>
           <div class="zone-time" data-zone-time="${index}">--:--:--</div>
-          <div class="zone-meta">${escapeHtml(stream.offsetHint)} · ${escapeHtml(stream.country)}</div>
+          <div class="zone-meta">${escapeHtml(stream.offsetHint)} · ${escapeHtml(stream.country)}<br>View: ${escapeHtml(stream.sourcePlace || stream.city)}</div>
         </article>
       `).join("");
 
