@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>World of Many Times | Live Time Zone Windows</title>
-  <meta name="description" content="Two live windows into the world, rotating through eight time zones three hours apart." />
+  <meta name="description" content="Two live windows into the world, starting with London and rotating through eight time zones roughly three hours apart." />
   <style>
     :root{
       --navy:#111b33;
@@ -639,7 +639,7 @@
       <div class="section-head">
         <div>
           <h2>Live windows</h2>
-          <p>Eight representative time zones are spaced roughly three hours apart. Each of the two windows can be static or rotating.</p>
+          <p>Eight representative time zones include London/UK and are spaced roughly three hours apart. Each of the two windows can be static or rotating.</p>
         </div>
         <div class="global-controls">
           <label for="rotationInterval">Rotate every</label>
@@ -718,7 +718,7 @@
     </section>
 
     <section class="edit-note">
-      <strong>To activate real embedded streams:</strong> edit the <code>STREAMS</code> list near the bottom of this file and paste a YouTube live video ID into each <code>youtubeId</code> field. Until then, each window shows a smart placeholder plus a “Find live cam” search button.
+      <strong>To activate real embedded streams:</strong> edit the <code>STREAMS</code> list near the bottom of this file and paste a YouTube live video ID into each <code>youtubeId</code> field. London is already embedded as a first test. Any stream that does not yet have a YouTube ID shows a smart placeholder plus a “Find live cam” search button.
     </section>
 
     <footer>
@@ -773,13 +773,14 @@
         line:"In Bridgetown, the ocean is doing more for morale than most calendars."
       },
       {
-        city:"Praia",
-        country:"Cabo Verde",
-        zone:"Atlantic/Cape_Verde",
-        offsetHint:"UTC−1",
-        youtubeId:"",
-        search:"Praia Cabo Verde live webcam YouTube",
-        line:"In Praia, the Atlantic is quietly disagreeing with everyone’s schedule."
+        city:"London",
+        country:"United Kingdom",
+        zone:"Europe/London",
+        offsetHint:"UK",
+        youtubeId:"M3EYAY2MftI",
+        sourceUrl:"https://www.youtube.com/watch?v=M3EYAY2MftI",
+        search:"London UK live webcam YouTube Abbey Road",
+        line:"In London, someone is crossing a road with more cultural pressure than seems fair."
       },
       {
         city:"Cape Town",
@@ -978,6 +979,7 @@
     }
 
     function searchUrl(stream){
+      if(stream.youtubeId && stream.sourceUrl) return stream.sourceUrl;
       return "https://www.youtube.com/results?search_query=" + encodeURIComponent(stream.search || `${stream.city} live webcam`);
     }
 
@@ -1080,7 +1082,7 @@
       win.elements.meta.textContent = `${stream.country} · ${stream.zone} · ${offset} · ${formatDate(now, stream.zone)}`;
       win.elements.line.textContent = `${stream.line} Locally, they are ${statusForHour(localHour)}.`;
       win.elements.search.href = searchUrl(stream);
-      win.elements.search.textContent = stream.youtubeId ? "Open source / search" : "Find live cam";
+      win.elements.search.textContent = stream.youtubeId ? "Open stream on YouTube" : "Find live cam";
       renderVideo(windowKey);
     }
 
