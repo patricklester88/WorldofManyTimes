@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>World of Many Times | Live Time Zone Windows</title>
-  <meta name="description" content="Two live windows into the world, starting with London and rotating through time zones with embedded streams from London, New York, Poland, Singapore, Hong Kong and Sydney." />
+  <meta name="description" content="Two live windows into the world, rotating through embedded streams from London, New York, Poland, Singapore, Hong Kong and Sydney, with live local times and future chat box slots." />
   <style>
     :root{
       --navy:#111b33;
@@ -432,6 +432,22 @@
       font-weight:800;
     }
 
+    .future-chat-slot{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:18px;
+      background:rgba(17,27,51,.06);
+      border:1px dashed rgba(17,27,51,.18);
+      color:#64748b;
+      font-size:13px;
+      line-height:1.45;
+      font-weight:850;
+    }
+
+    .future-chat-slot strong{
+      color:#1f2a44;
+    }
+
     .zones-grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
@@ -679,6 +695,8 @@
           </div>
 
           <p class="stream-line" id="windowALine">The world is buffering with quiet judgement.</p>
+
+          <div class="future-chat-slot"><strong>Future chat slot:</strong> one day this could become a tiny WhoAmI / Discover Me style chat box for this place.</div>
         </article>
 
         <article class="stream-card" aria-label="Stream window two">
@@ -707,6 +725,8 @@
           </div>
 
           <p class="stream-line" id="windowBLine">The second window is checking whether tomorrow has started without you.</p>
+
+          <div class="future-chat-slot"><strong>Future chat slot:</strong> one day this could become a tiny WhoAmI / Discover Me style chat box for this place.</div>
         </article>
       </div>
     </section>
@@ -718,7 +738,7 @@
     </section>
 
     <section class="edit-note">
-      <strong>To activate real embedded streams:</strong> edit the <code>STREAMS</code> list near the bottom of this file and paste a YouTube live video ID into each <code>youtubeId</code> field. London, New York, Poland, Singapore, Hong Kong and Sydney are already embedded as first test streams. Each embedded stream also shows the place or landmark being shown. Any stream that does not yet have a YouTube ID shows a smart placeholder plus a “Find live cam” search button.
+      <strong>To activate real embedded streams:</strong> edit the <code>STREAMS</code> list near the bottom of this file and paste a YouTube live video ID into each <code>youtubeId</code> field. London, New York, Poland, Singapore, Hong Kong and Sydney are already embedded as first test streams. Each embedded stream shows the place or landmark once in the main details line. The small box under each window is reserved for a possible future WhoAmI / Discover Me style chat feature. Any stream that does not yet have a YouTube ID shows a smart placeholder plus a “Find live cam” search button.
     </section>
 
     <footer>
@@ -834,10 +854,10 @@
         country:"Hong Kong",
         zone:"Asia/Hong_Kong",
         offsetHint:"UTC+8",
-        youtubeId:"r1VOcQ1xUN0",
-        sourceUrl:"https://www.youtube.com/watch?v=r1VOcQ1xUN0",
-        sourcePlace:"The Peak, overlooking Victoria Harbour and Kowloon",
-        search:"Hong Kong The Peak Victoria Harbour live webcam YouTube",
+        youtubeId:"7XT3EY_1NPU",
+        sourceUrl:"https://www.youtube.com/watch?v=7XT3EY_1NPU",
+        sourcePlace:"Ho Man Tin Hill, Hong Kong cityscape",
+        search:"Hong Kong cityscape live webcam Ho Man Tin Hill YouTube",
         line:"In Hong Kong, the skyline is pretending it was arranged by someone with very good handwriting."
       },
       {
@@ -1114,7 +1134,7 @@
       win.elements.time.textContent = formatTime(now, stream.zone);
       const shownPlace = stream.sourcePlace || stream.city;
       win.elements.meta.textContent = `${stream.country} · ${stream.zone} · ${offset} · ${formatDate(now, stream.zone)} · Showing: ${shownPlace}`;
-      win.elements.line.textContent = `${stream.line} Locally, they are ${statusForHour(localHour)}. Live view: ${shownPlace}.`;
+      win.elements.line.textContent = `${stream.line} Locally, they are ${statusForHour(localHour)}.`;
       win.elements.search.href = searchUrl(stream);
       win.elements.search.textContent = stream.youtubeId ? "Open stream on YouTube" : "Find live cam";
       renderVideo(windowKey);
