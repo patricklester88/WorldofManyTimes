@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>World of Many Times | Live Time Zone Windows</title>
-  <meta name="description" content="Two live windows into the world, rotating through embedded streams from London, New York, Poland, South Africa, Dubai, Pakistan, Thailand, Singapore, Hong Kong and Sydney, with live local times and future chat box slots." />
+  <meta name="description" content="Two live windows into the world, rotating through embedded streams from London, New York, Amsterdam, Poland, South Africa, Dubai, Pakistan, Thailand, Singapore, Hong Kong and Sydney, with live local times and future chat box slots." />
   <style>
     :root{
       --navy:#111b33;
@@ -731,14 +731,14 @@
       </div>
     </section>
 
-    <section class="zones-grid" id="zonesGrid" aria-label="Eight time zone choices"></section>
+    <section class="zones-grid" id="zonesGrid" aria-label="Live time zone choices"></section>
 
     <section class="statement" id="statement">
       One window can stay home. The other can wander off and make the rest of the planet look suspiciously busy.
     </section>
 
     <section class="edit-note">
-      <strong>To activate real embedded streams:</strong> edit the <code>STREAMS</code> list near the bottom of this file and paste a YouTube live video ID into each <code>youtubeId</code> field. London, New York, Poland, South Africa, Dubai, Pakistan, Thailand, Singapore, Hong Kong and Sydney are already embedded as first test streams. Each embedded stream shows the place or landmark once in the main details line. The small box under each window is reserved for a possible future WhoAmI / Discover Me style chat feature. Any stream that does not yet have a YouTube ID shows a smart placeholder plus a “Find live cam” search button.
+      <strong>To activate real embedded streams:</strong> edit the <code>STREAMS</code> list near the bottom of this file and paste a YouTube live video ID into each <code>youtubeId</code> field. London, New York, Amsterdam, Poland, South Africa, Dubai, Pakistan, Thailand, Singapore, Hong Kong and Sydney are already embedded as first test streams. Each embedded stream shows the place or landmark once in the main details line. The small box under each window is reserved for a possible future WhoAmI / Discover Me style chat feature. Any stream that does not yet have a YouTube ID shows a smart placeholder plus a “Find live cam” search button.
     </section>
 
     <footer>
@@ -806,6 +806,17 @@
         sourcePlace:"Abbey Road crossing, London",
         search:"London UK live webcam YouTube Abbey Road",
         line:"In London, someone is crossing a road with more cultural pressure than seems fair."
+      },
+      {
+        city:"Amsterdam",
+        country:"Netherlands",
+        zone:"Europe/Amsterdam",
+        offsetHint:"UTC+1/+2",
+        youtubeId:"Gd9d4q6WvUY",
+        sourceUrl:"https://www.youtube.com/watch?v=Gd9d4q6WvUY",
+        sourcePlace:"Dam Square / De Dam, Amsterdam",
+        search:"Amsterdam Dam Square live webcam YouTube",
+        line:"In Amsterdam, the bicycles have formed a committee and the canals are pretending they are not judging anyone."
       },
       {
         city:"Warsaw",
